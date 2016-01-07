@@ -2,11 +2,13 @@
 
 set -e # exit with nonzero exit code if anything fails
 
+# clone the current gh-pages branch into the repo folder
+git clone -b gh-pages --single-branch git@github.com:Team846/wpilib-maven.git repo
+
 sbt run
 
-# go to the out directory and create a *new* Git repo
+# go to the out directory
 cd repo
-git init
 
 # inside this git repo we'll pretend to be a new user
 git config user.name "Travis CI"
@@ -21,4 +23,4 @@ git commit -m "Repo Deploy to GitHub Pages"
 # repo's gh-pages branch. (All previous history on the gh-pages branch
 # will be lost, since we are overwriting it.) We redirect any output to
 # /dev/null to hide any sensitive credential data that might otherwise be exposed.
-git push --force --quiet "git@github.com:Team846/wpilib-maven.git" master:gh-pages > /dev/null 2>&1
+git push --force --quiet "git@github.com:Team846/wpilib-maven.git" gh-pages:gh-pages > /dev/null 2>&1
