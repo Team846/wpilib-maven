@@ -2,6 +2,12 @@
 
 set -e # exit with nonzero exit code if anything fails
 
+# install ssh keys
+openssl aes-256-cbc -K $encrypted_ef9664d9b49b_key -iv $encrypted_ef9664d9b49b_iv -in .travisdeploykey.enc -out .travisdeploykey -d
+chmod go-rwx .travisdeploykey
+eval `ssh-agent -s`
+ssh-add .travisdeploykey
+
 # clone the current gh-pages branch into the repo folder
 git clone -b gh-pages --single-branch git@github.com:Team846/wpilib-maven.git repo
 
