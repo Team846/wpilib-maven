@@ -3,7 +3,7 @@
   <groupId>edu.wpi.first</groupId>
   <artifactId>wpilib</artifactId>
   <versioning>
-    <release>0.1.0.201601151923</release>
+    <release>0.1.0.201602112135</release>
     <versions>
       <version>0.1.0.201502241928</version>
       <version>0.1.0.201511212244</version>
@@ -12,7 +12,8 @@
       <version>0.1.0.201601072029</version>
       <version>0.1.0.201601151923</version>
       <version>0.1.0.201601251843</version>
+      <version>0.1.0.201602112135</version>
     </versions>
-    <lastUpdated>20160211010855</lastUpdated>
+    <lastUpdated>20160212011448</lastUpdated>
   </versioning>
 </metadata>
