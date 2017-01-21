@@ -3,7 +3,7 @@
   <groupId>edu.wpi.first</groupId>
   <artifactId>wpilib</artifactId>
   <versioning>
-    <release>2017.1.1</release>
+    <release>2017.2.1</release>
     <versions>
       <version>0.1.0.201502241928</version>
       <version>0.1.0.201511212244</version>
@@ -94,7 +94,9 @@
       <version>2017.1.1.20170117011807-3-gb719332</version>
       <version>2017.1.1.20170119031444-3-gb719332</version>
       <version>2017.1.1.20170120033303-5-g4c7f0c4</version>
+      <version>2017.2.1.20170121015311</version>
+      <version>2017.2.1</version>
     </versions>
-    <lastUpdated>20170121045737</lastUpdated>
+    <lastUpdated>20170121185347</lastUpdated>
   </versioning>
 </metadata>
