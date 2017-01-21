@@ -110,6 +110,11 @@ object Main extends App {
     installWPILib(version)
   }
 
+  val ctrVersion = getLatestCTRVersion
+  latestVersionsHTML.println(s"<h2>Latest CTRLib version: $ctrVersion</h2>")
+  downloadCTR(ctrVersion)
+  installCTR(ctrVersion)
+
   latestVersionsHTML.println("</body>")
   latestVersionsHTML.println("</html>")
   latestVersionsHTML.close()
