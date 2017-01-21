@@ -77,7 +77,7 @@ object Main extends App {
     val ctrZipPath = s"${ctrURL}/CTRE_FRCLibs_NON-WINDOWS_v${version}.zip"
     (new URL(ctrZipPath) #> (ctrDownloadsDir / "ctr.zip")).!
 
-    s"unzip -o ${(ctrDownloadsDir / "ctr.zip").getAbsolutePath} -d ${ctrDownloadsDir.getAbsolutePath}/ctr"
+    s"unzip -o ${(ctrDownloadsDir / "ctr.zip").getAbsolutePath} -d ${ctrDownloadsDir.getAbsolutePath}/ctr".!
   }
 
   def installCTR(version: String) = {
