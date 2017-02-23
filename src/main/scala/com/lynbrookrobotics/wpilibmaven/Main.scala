@@ -62,6 +62,29 @@ object Main extends App {
       s"-DartifactId=networktables " +
       s"-Dversion=$version " +
       s"-Dsources=${networktablesSources.getAbsolutePath}").!
+
+    val cscoreMain = wpiDownloadsDir / "java" / "lib" / "cscore.jar"
+    val cscoreSources = wpiDownloadsDir / "java" / "lib" / "cscore-sources.jar"
+
+    (s"mvn deploy:deploy-file " +
+      s"-Dfile=${cscoreMain.getAbsolutePath} " +
+      s"-Durl=file://${repoDir.getAbsolutePath} " +
+      s"-DgroupId=edu.wpi.first " +
+      s"-DartifactId=cscore " +
+      s"-Dversion=$version " +
+      s"-Dsources=${cscoreSources.getAbsolutePath}").!
+
+    val nativesFolder = wpiDownloadsDir / "java" / "lib" / "native" / "lib"
+    val nativesMain = wpiDownloadsDir / "java" / "lib" / "natives.jar"
+
+    Seq("zip", "-r", "-j", nativesMain.getAbsolutePath, nativesFolder.getAbsolutePath).!
+
+    (s"mvn deploy:deploy-file " +
+      s"-Dfile=${nativesMain.getAbsolutePath} " +
+      s"-Durl=file://${repoDir.getAbsolutePath} " +
+      s"-DgroupId=edu.wpi.first " +
+      s"-DartifactId=natives " +
+      s"-Dversion=$version").!
   }
 
   // CTR
