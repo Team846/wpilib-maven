@@ -94,26 +94,26 @@ object Main extends App {
 
   val ctrURL = "http://www.ctr-electronics.com/downloads/lib"
 
-  def getLatestCTRVersion = "4.4.1.12" // ¯\_(ツ)_/¯ TODO: write scraper method
+  def getLatestCTRVersion = "5.1.3.1" // ¯\_(ツ)_/¯ TODO: write scraper method
 
   def downloadCTR(version: String) = {
-    val ctrZipPath = s"${ctrURL}/CTRE_FRCLibs_NON-WINDOWS_v${version}.zip"
+    val ctrZipPath = s"${ctrURL}/CTRE_Phoenix_FRCLibs_NON-WINDOWS_v${version}.zip"
     (new URL(ctrZipPath) #> (ctrDownloadsDir / "ctr.zip")).!
 
     s"unzip -o ${(ctrDownloadsDir / "ctr.zip").getAbsolutePath} -d ${ctrDownloadsDir.getAbsolutePath}/ctr".!
   }
 
   def installCTR(version: String) = {
-    val ctrLib = ctrDownloadsDir / "ctr" / "java" / "lib" / "CTRLib.jar"
-    val ctrJavadoc = ctrDownloadsDir / "ctr" / "java" / "docs" / "CTRLib-javadoc.jar"
+    val ctrLib = ctrDownloadsDir / "ctr" / "java" / "lib" / "CTRE_Phoenix.jar"
+    val ctrSources = ctrDownloadsDir / "ctr" / "java" / "docs" / "CTRE_Phoenix-sources.jar"
 
     (s"mvn deploy:deploy-file " +
       s"-Dfile=${ctrLib.getAbsolutePath} " +
       s"-Durl=file://${repoDir.getAbsolutePath} " +
       s"-DgroupId=com.ctre " +
-      s"-DartifactId=ctrlib " +
+      s"-DartifactId=phoenix " +
       s"-Dversion=$version " +
-      s"-Djavadoc=${ctrJavadoc.getAbsolutePath}").!
+      s"-Dsources=${ctrSources.getAbsolutePath}").!
   }
 
   // General
@@ -134,7 +134,7 @@ object Main extends App {
   }
 
   val ctrVersion = getLatestCTRVersion
-  latestVersionsHTML.println(s"<h2>Latest CTRLib version: $ctrVersion</h2>")
+  latestVersionsHTML.println(s"<h2>Latest CTRE Phoenix version: $ctrVersion</h2>")
   downloadCTR(ctrVersion)
   installCTR(ctrVersion)
 
