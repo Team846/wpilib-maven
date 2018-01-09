@@ -85,6 +85,17 @@ object Main extends App {
       s"-DgroupId=edu.wpi.first " +
       s"-DartifactId=natives " +
       s"-Dversion=$version").!
+
+    val utilsMain = wpiDownloadsDir / "java" / "lib" / "wpiutil.jar"
+    val utilsSources = wpiDownloadsDir / "java" / "lib" / "wpiutil-sources.jar"
+
+    (s"mvn deploy:deploy-file " +
+      s"-Dfile=${utilsMain.getAbsolutePath} " +
+      s"-Durl=file://${repoDir.getAbsolutePath} " +
+      s"-DgroupId=edu.wpi.first " +
+      s"-DartifactId=wpiutil " +
+      s"-Dversion=$version " +
+      s"-Dsources=${utilsSources.getAbsolutePath}").!
   }
 
   // CTR
