@@ -52,16 +52,6 @@ object Main extends App {
       s"-Dversion=$version " +
       s"-Dsources=${wpilibSources.getAbsolutePath}").!
 
-    val networktablesMain = wpiDownloadsDir / "java" / "lib" / "NetworkTables.jar"
-    val networktablesSources = wpiDownloadsDir / "java" / "lib" / "NetworkTables-sources.jar"
-
-    (s"mvn deploy:deploy-file " +
-      s"-Dfile=${networktablesMain.getAbsolutePath} " +
-      s"-Durl=file://${repoDir.getAbsolutePath} " +
-      s"-DgroupId=edu.wpi.first " +
-      s"-DartifactId=networktables " +
-      s"-Dversion=$version " +
-      s"-Dsources=${networktablesSources.getAbsolutePath}").!
 
     val cscoreMain = wpiDownloadsDir / "java" / "lib" / "cscore.jar"
     val cscoreSources = wpiDownloadsDir / "java" / "lib" / "cscore-sources.jar"
@@ -74,17 +64,30 @@ object Main extends App {
       s"-Dversion=$version " +
       s"-Dsources=${cscoreSources.getAbsolutePath}").!
 
-    val nativesFolder = wpiDownloadsDir / "java" / "lib" / "native" / "lib"
-    val nativesMain = wpiDownloadsDir / "java" / "lib" / "natives.jar"
 
-    Seq("zip", "-r", "-j", nativesMain.getAbsolutePath, nativesFolder.getAbsolutePath).!
+    val ntcoreMain = wpiDownloadsDir / "java" / "lib" / "ntcore.jar"
+    val ntcoreSources = wpiDownloadsDir / "java" / "lib" / "ntcore-sources.jar"
 
     (s"mvn deploy:deploy-file " +
-      s"-Dfile=${nativesMain.getAbsolutePath} " +
+      s"-Dfile=${ntcoreMain.getAbsolutePath} " +
       s"-Durl=file://${repoDir.getAbsolutePath} " +
       s"-DgroupId=edu.wpi.first " +
-      s"-DartifactId=natives " +
-      s"-Dversion=$version").!
+      s"-DartifactId=ntcore " +
+      s"-Dversion=$version " +
+      s"-Dsources=${ntcoreSources.getAbsolutePath}").!
+
+
+    val opencvMain = wpiDownloadsDir / "java" / "lib" / "opencv.jar"
+    val opencvSources = wpiDownloadsDir / "java" / "lib" / "opencv-sources.jar"
+
+    (s"mvn deploy:deploy-file " +
+      s"-Dfile=${opencvMain.getAbsolutePath} " +
+      s"-Durl=file://${repoDir.getAbsolutePath} " +
+      s"-DgroupId=org.opencv " +
+      s"-DartifactId=opencv " +
+      s"-Dversion=$version " +
+      s"-Dsources=${opencvMain.getAbsolutePath}").!
+
 
     val utilsMain = wpiDownloadsDir / "java" / "lib" / "wpiutil.jar"
     val utilsSources = wpiDownloadsDir / "java" / "lib" / "wpiutil-sources.jar"
@@ -116,7 +119,7 @@ object Main extends App {
 
   def installCTR(version: String) = {
     val ctrLib = ctrDownloadsDir / "ctr" / "java" / "lib" / "CTRE_Phoenix.jar"
-    val ctrSources = ctrDownloadsDir / "ctr" / "java" / "docs" / "CTRE_Phoenix-sources.jar"
+    val ctrSources = ctrDownloadsDir / "ctr" / "java" / "lib" / "CTRE_Phoenix-sources.jar"
 
     (s"mvn deploy:deploy-file " +
       s"-Dfile=${ctrLib.getAbsolutePath} " +
@@ -137,7 +140,7 @@ object Main extends App {
   val todayDate = new Date()
   latestVersionsHTML.println(s"<h1>Latest WPILib versions as of $todayDate</h1>")
 
-  List("development", "beta", "stable", "release").foreach { channel =>
+  List("development", "beta", "release").foreach { channel =>
     val version = getLatestWPIVersion(channel)
     latestVersionsHTML.println(s"<h2>Latest $channel version: $version</h2>")
     downloadWPILib(version, channel)
