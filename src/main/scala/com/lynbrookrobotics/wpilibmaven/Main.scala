@@ -108,7 +108,7 @@ object Main extends App {
 
   val ctrURL = "http://www.ctr-electronics.com/downloads/lib"
 
-  def getLatestCTRVersion = "5.2.2.0" // ¯\_(ツ)_/¯ TODO: write scraper method
+  def getLatestCTRVersion = "5.3.1.0" // ¯\_(ツ)_/¯ TODO: write scraper method
 
   def downloadCTR(version: String) = {
     val ctrZipPath = s"${ctrURL}/CTRE_Phoenix_FRCLibs_NON-WINDOWS_v${version}.zip"
